@@ -9,5 +9,6 @@ module.exports = defineConfig({
   devServer: {
     host: 'localhost',
     port: 8080
-  }
+  },
+  lintOnSave:false
 })
