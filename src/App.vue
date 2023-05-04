@@ -1,18 +1,16 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-  <TestApi />
+  <PageHeader></PageHeader>
+  <router-view></router-view>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-import TestApi from './components/TestApi.vue'
+import PageHeader from '@/components/PageHeader'
+// import Main from '@/views/Main.vue'
 
 export default {
   name: 'App',
   components: {
-    // HelloWorld
-    TestApi
+    PageHeader
   }
 }
 </script>
@@ -25,5 +23,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+#nav a.router-link-exact-active {
+  color:
 }
 </style>
