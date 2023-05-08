@@ -1,9 +1,11 @@
 import VueCookie from 'vue-cookie';
-import {createRouter, createWebHistory} from 'vue-router'
+import {createRouter, createWebHistory, createWebHashHistory} from 'vue-router'
 
 
 const router = createRouter({
-    history: createWebHistory(),
+    // history: createWebHistory(),
+    // createWebHistory 사용시 새로고침, 뒤로가기 시 404에러 발생
+    history: createWebHashHistory(),
     routes: [{
         path: '/',
         redirect: '/home'
@@ -27,10 +29,10 @@ const router = createRouter({
 
 router.beforeEach(async (to, from) => {
     console.log(` router from : '${from.path}' ==> to: '${to.path}' ` )
-    if (VueCookie.get('userId') === null && (to.name !== 'Login' && to.name !== 'SignUp') ) {
+    if (VueCookie.get('accessToken') === null && (to.name !== 'Login' && to.name !== 'SignUp') ) {
         return {name: 'Login'}
     }
-    if (VueCookie.get('userId') !== null && to.name === 'Login') {
+    if (VueCookie.get('accessToken') !== null && to.name === 'Login') {
         return {name: 'Home'}
     }
 })

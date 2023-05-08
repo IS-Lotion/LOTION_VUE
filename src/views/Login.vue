@@ -5,10 +5,10 @@
       <div id="loginForm">
         
           <p>
-            <input class="w3-input" name="uid" placeholder="Enter your ID" v-model="user_id"><br>
+            <input class="w3-input" name="uid" placeholder="Enter your ID" v-model="loginInfo.userId"><br>
           </p>
           <p>
-            <input name="password" class="w3-input" placeholder="Enter your password" v-model="user_pw" type="password">
+            <input name="password" class="w3-input" placeholder="Enter your password" v-model="loginInfo.userPwd" type="password">
           </p>
           <p>
             <button @click="fnLogin()" class="w3-button w3-green w3-round">Login</button>
@@ -21,37 +21,40 @@
 </template>
 
 <script>
-import axios from 'axios';
+import {mapActions} from 'vuex'
+
+const loginAuthStore = 'loginAuthStore'
 
 export default {
+  name: 'LoginPage',
+  components: {},
   data() {
     return {
-      user_id: this.$cookies.get("userId"),
-      user_pw: ''
+      loginInfo: {
+        userId: '',
+        userPwd: ''
+      }
     }
   },
+  created() {
+    this.initStore()
+  },
+  mounted() {},
+  computed: {},
   methods: {
+    ...mapActions(loginAuthStore, ['login','initStore']),
+
     fnLogin() {
-      if (this.user_id === '') {
-        alert('ID를 입력하세요.')
-        return
-      }
-
-      if (this.user_pw === '') {
-        alert('비밀번호를 입력하세요.')
-        return
-      }
-      axios.get('http://localhost:8080/login')
-            .then((response) =>{
-              this.$cookies.set("userId", this.user_id)
-              this.$cookies.set("userName", response.data)
-
-              this.$router.push('/home')
-            })
-            .catch(function(error) {
-              console.log(error)
-            });
-      
+      const loginInfo  = this.loginInfo
+      console.log('Loginpage > fnLogin > loginInfo => ', loginInfo)
+      this.login(loginInfo)
+        .then((res) =>{
+          console.log('===> LOGIN SUCCESS!!! <===' )
+          this.$router.push('/home')
+        })
+        .catch(function(error) {
+          console.log('error occur'+ error)
+        });   
     },
     goSignUp(){
         this.$router.push('/signUp')

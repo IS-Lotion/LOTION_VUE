@@ -6,13 +6,16 @@
 </template>
 
 <script>
-export default {
+import {mapActions} from 'vuex'
 
+const loginAuthStore = 'loginAuthStore'
+
+export default {
   methods: {
+    ...mapActions(loginAuthStore, ['login','initStore']),
     logout(){
-        this.$cookies.remove("userId");
-        this.$cookies.remove("userName"); 
-        this.$router.push('/Login');
+        this.initStore();
+        this.$router.push('/login');
     }
   }
 }
