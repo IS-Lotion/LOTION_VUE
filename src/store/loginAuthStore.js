@@ -66,7 +66,7 @@ const loginAuthStore = {
                     .userLogin(userInfo)
                     .then((res) =>{
      
-                        const loginInfo = res.data.result
+                        const loginInfo = res.data
                         console.log('=== loginAuthStore > login > loginInfo: ', loginInfo)
                         
                         const payload = {
