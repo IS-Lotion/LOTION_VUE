@@ -10,7 +10,7 @@
               <input name="password" class="w3-input" placeholder="Enter your password" v-model="user_pw" type="password">
             </p>
             <p>
-              <input name="password" class="w3-input" placeholder="confirm password" v-model="user_pw" type="password">
+              <input name="password" class="w3-input" placeholder="confirm password" v-model="user_pw2" type="password">
             </p>
             <p>
               <button @click="fnSignUp()" type="submit" class="w3-button w3-green w3-round">Sign up</button>
@@ -21,6 +21,8 @@
   </template>
   
   <script>
+  import signUpService from '@/service/signUpService.js'
+
   export default {
     data() {
       return {
@@ -30,7 +32,26 @@
       }
     },
     methods: {
-    fnSignUp() {
+    async fnSignUp() {
+
+        const userData = {
+          user_id: this.user_id,
+          user_pw: this.user_pw,
+          user_pw2: this.user_pw2
+        };
+
+        const response = await signUpService.registerUser(userData);
+        
+        if(response.status == 200){
+          console.log('=== registerUser: ', userData)
+          alert('회원가입 되었습니다.');
+          this.$router.push('/login');
+        } else {
+          console.log('=== registerUser: ', userData)
+          alert(response.data);
+        }
+
+        /*
         if (this.user_id === '') {
           alert('ID를 입력하세요.')
           return
@@ -42,6 +63,8 @@
         }
   
         alert('회원가입 되었습니다.')
+        */
+
       }
     }
   }

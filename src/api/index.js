@@ -9,6 +9,7 @@ function createrAxiosApi() {
     // return setInterceptors(axiosApi)
     return axiosApi
 }
+
 const axiosApi = createrAxiosApi()
 
 export {axiosApi}
