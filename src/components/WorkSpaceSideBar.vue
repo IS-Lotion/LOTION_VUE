@@ -2,12 +2,26 @@
     <aside id = 'workspace__sidebar'>
         <p>workspace left side</p>
         <p>workspace left side</p>
-      
+        <div id="create_workspace" @click="openPopup()">
+            <button> + </button>
+            <span> 워크스페이스 생성</span>
+        </div>
 
     </aside>
 </template>
 
 <script>
+
+export default {
+    name: 'WorkspaceSideBar',
+
+    methods : {
+        openPopup(){
+            this.$emit("openCreateWorkspace", true)
+        }
+    }
+
+}
 </script>
 
 <style>
@@ -22,4 +36,8 @@
 p {
     color: aliceblue;
 }
+span {
+    color: white;
+}
+
 </style>
