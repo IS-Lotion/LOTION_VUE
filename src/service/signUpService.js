@@ -10,7 +10,21 @@ export default {
                     resolve(res)
                 })
                 .catch((err) => {
-                    console.log('signUp service errer')
+                    console.log('signUp service error')
+                    reject(err)
+                })
+        })
+    },
+    checkDuplicateEmail(email) {
+        return new Promise((resolve, reject) => {
+            axiosApi
+                .post('/checkDuplicateEmail', email)
+                .then((res) => {
+                    console.log('check email okay')
+                    resolve(res)
+                })
+                .catch((err) => {
+                    console.log('check email error')
                     reject(err)
                 })
         })
