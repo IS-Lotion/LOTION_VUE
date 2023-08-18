@@ -15,16 +15,16 @@ export default {
                 })
         })
     },
-    checkDuplicateEmail(email) {
+    checkDuplicateId(userId) {
         return new Promise((resolve, reject) => {
             axiosApi
-                .post('/checkDuplicateEmail', email)
+                .post('/checkDuplicateId', userId)
                 .then((res) => {
-                    console.log('check email okay')
+                    console.log('check userId okay')
                     resolve(res)
                 })
                 .catch((err) => {
-                    console.log('check email error')
+                    console.log('check userId error')
                     reject(err)
                 })
         })
